@@ -22,7 +22,8 @@ import Modal from "@mui/material/Modal";
 // state
 export default function Main() {
   const [tenants, setTenants] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // modal open state
+  const [tenantPrefill, setTenantPrefill] = useState({}); // fills text fields in update modal form
 
   // modal styling
   const style = {
@@ -40,13 +41,17 @@ export default function Main() {
   useEffect(() => {
     (async () => {
       const items = await listAllItems("Tenants");
-      // console.log(items);
 
       setTenants(items);
     })();
   }, []);
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (tenantObject) => {
+    // fills modal with existing info
+    setTenantPrefill(tenantObject);
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
 
   const handleAddTenant = async (event) => {
@@ -67,6 +72,12 @@ export default function Main() {
     setTenants((oldTenants) => {
       return [...oldTenants, newTenant];
     });
+  };
+
+  const handleUpdateTenant = async (event) => {
+    event.preventDefault();
+
+    setOpen(false);
   };
 
   return (
@@ -114,7 +125,9 @@ export default function Main() {
                         ? "Utilities Included"
                         : "Utilities Not Included"}
                     </p>
-                    <Button onClick={handleOpen}>Edit</Button>
+                    <Button onClick={() => handleOpen(tenantObject)}>
+                      Edit
+                    </Button>
                   </div>
                 );
               })}
@@ -131,21 +144,68 @@ export default function Main() {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Update Tenant Info
             </Typography>
-            <form onSubmit={(event) => handleAddTenant(event)}>
+            <form onSubmit={(event) => handleUpdateTenant(event)}>
               <label htmlFor="">Name</label>
-              <input type="text" name="tenantName" id="tenantName" />
+              <input
+                onChange={(event) =>
+                  setTenantPrefill({
+                    id: tenantPrefill.id,
+                    name: event.target.value,
+                    phone: tenantPrefill.phone,
+                    property: tenantPrefill.property,
+                    utilitiesIncluded: tenantPrefill.utilitiesIncluded,
+                  })
+                }
+                value={tenantPrefill.name}
+                type="text"
+                name="tenantName"
+                id="tenantName"
+              />
               <br />
 
               <label htmlFor="">Phone Number</label>
-              <input type="number" name="tenantPhone" id="tenantPhone" />
+              <input 
+                 onChange={(event) =>
+                  setTenantPrefill({
+                    id: tenantPrefill.id,
+                    name: tenantPrefill.name,
+                    phone: event.target.value,
+                    property: tenantPrefill.property,
+                    utilitiesIncluded: tenantPrefill.utilitiesIncluded,
+                  })
+                }
+              value={tenantPrefill.phone} type="number" name="tenantPhone" id="tenantPhone" />
               <br />
 
               <label htmlFor="">Property Leased</label>
-              <input type="text" name="propertyLeased" id="propertyLeased" />
+              <input
+                onChange={(event) =>
+                  setTenantPrefill({
+                    id: tenantPrefill.id,
+                    name: tenantPrefill.name,
+                    phone: tenantPrefill.phone,
+                    property: event.target.value,
+                    utilitiesIncluded: tenantPrefill.utilitiesIncluded,
+                  })
+                }
+                value={tenantPrefill.property}
+                type="text"
+                name="propertyLeased"
+                id="propertyLeased"
+              />
               <br />
 
               <label htmlFor="">Utilities Included</label>
               <input
+                 onChange={(event) =>
+                  setTenantPrefill({
+                    id: tenantPrefill.id,
+                    name: tenantPrefill.name,
+                    phone: tenantPrefill.phone,
+                    property: tenantPrefill.property,
+                    utilitiesIncluded: event.target.checked,
+                  })
+                }
                 type="checkbox"
                 name="utilitiesIncluded"
                 id="utilitiesIncluded"
