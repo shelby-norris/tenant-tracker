@@ -1,9 +1,23 @@
 # Tenant Tracker
 
-An app built with commercial real estate professionals in mind, this CRUD app allows for quick and easy tenant database management. You can add new tenants, update existing tenant information, or delete tenants who are no longer under lease.
+A web application designed for managing and organizing tenants in commercial real estate properties.
 
-- Built with React.js and DynamoDB
-- Deployed with Vercel
-- Styled with Sass and Material UI
+Made with:
 
-## Check Back for More Updates!
+- React.js
+- DynamoDB
+- Material UI
+
+## Features
+
+- Add new tenants
+- Update existing tenant information
+- Remove tenant from database
+- See which properties tenants are leasing
+
+## Tenant Schema
+
+### Table name: Tenants
+
+`{ id: String, name: String, phone: number, property: string, utilitiesIncluded: boolean }`
+

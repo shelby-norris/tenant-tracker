@@ -9,6 +9,9 @@ import Footer from "./components/Footer.jsx";
 function App() {
   const [count, setCount] = useState(0);
 
+
+// Components imported for more organized code
+
   return (
     <>
       <Header></Header>
