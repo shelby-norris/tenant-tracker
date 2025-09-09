@@ -7,6 +7,7 @@ import {
   GetCommand,
   UpdateCommand,
   DeleteCommand,
+  // listAllItems
 } from "@aws-sdk/lib-dynamodb";
 
 // All of the following code was copied from previous assignment
