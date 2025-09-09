@@ -5,6 +5,6 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <div>Footer</div>
+    <footer>&copy; Shelby Norris 2025</footer>
   )
 }

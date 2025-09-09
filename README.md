@@ -17,7 +17,7 @@ Made with:
 
 ## Tenant Schema
 
-### Table name: Tenants
+**Table name: Tenants**
 
 `{ id: String, name: String, phone: number, property: string, utilitiesIncluded: boolean }`
 
