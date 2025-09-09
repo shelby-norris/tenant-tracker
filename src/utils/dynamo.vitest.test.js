@@ -10,6 +10,8 @@ import {
 
 import { createItem, listAllItems, getItem, deleteItem } from "./dynamo";
 
+// All of the following code was copied from previous assignment
+
 const ddbMock = mockClient(DynamoDBDocumentClient);
 
 beforeEach(() => {

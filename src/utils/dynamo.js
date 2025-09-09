@@ -9,6 +9,8 @@ import {
   DeleteCommand,
 } from "@aws-sdk/lib-dynamodb";
 
+// All of the following code was copied from previous assignment
+
 const client = new DynamoDBClient({
   region: import.meta.env.VITE_AWS_REGION,
 
