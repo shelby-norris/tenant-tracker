@@ -41,7 +41,7 @@ export default function Main() {
   useEffect(() => {
     (async () => {
       const items = await listAllItems("Tenants");
-
+      console.log(items);
       setTenants(items);
     })();
   }, []);
@@ -77,26 +77,54 @@ export default function Main() {
   const handleUpdateTenant = async (event) => {
     event.preventDefault();
 
+    const { phone, property, utilitiesIncluded } = tenantPrefill;
+
+    console.log(tenantPrefill.id);
+
+    await updateItem(
+      "Tenants",
+      { id: tenantPrefill.id, name: tenantPrefill.name },
+      { phone, property, utilitiesIncluded }
+    );
+
+    setTenants((oldTenants) => {
+      return oldTenants.map((tenantObject) => {
+        return tenantObject.id === tenantPrefill.id
+          ? tenantPrefill
+          : tenantObject;
+      });
+    });
+
     setOpen(false);
+  };
+
+  const handleDeleteTenant = async (id, name) => {
+    await deleteItem("Tenants", { id: id, name: name });
+    console.log(id);
+    setTenants((oldTenants) => {
+      return oldTenants.filter((tenantObject) => {
+        return tenantObject.id !== id;
+      });
+    });
   };
 
   return (
     <main>
       <h2>New Tenant Intake Form</h2>
       <form onSubmit={(event) => handleAddTenant(event)}>
-        <label htmlFor="">Name</label>
+        <label htmlFor="tenantName">Name</label>
         <input type="text" name="tenantName" id="tenantName" />
         <br />
 
-        <label htmlFor="">Phone Number</label>
+        <label htmlFor="tenantPhone">Phone Number</label>
         <input type="number" name="tenantPhone" id="tenantPhone" />
         <br />
 
-        <label htmlFor="">Property Leased</label>
+        <label htmlFor="propertyLeased">Property Leased</label>
         <input type="text" name="propertyLeased" id="propertyLeased" />
         <br />
 
-        <label htmlFor="">Utilities Included</label>
+        <label htmlFor="utilitiesIncluded">Utilities Included</label>
         <input
           type="checkbox"
           name="utilitiesIncluded"
@@ -127,6 +155,10 @@ export default function Main() {
                     </p>
                     <Button onClick={() => handleOpen(tenantObject)}>
                       Edit
+                    </Button>
+
+                    <Button onClick={() => handleDeleteTenant(tenantObject.id, tenantObject.name)}>
+                      Delete
                     </Button>
                   </div>
                 );
@@ -164,8 +196,8 @@ export default function Main() {
               <br />
 
               <label htmlFor="">Phone Number</label>
-              <input 
-                 onChange={(event) =>
+              <input
+                onChange={(event) =>
                   setTenantPrefill({
                     id: tenantPrefill.id,
                     name: tenantPrefill.name,
@@ -174,7 +206,11 @@ export default function Main() {
                     utilitiesIncluded: tenantPrefill.utilitiesIncluded,
                   })
                 }
-              value={tenantPrefill.phone} type="number" name="tenantPhone" id="tenantPhone" />
+                value={tenantPrefill.phone}
+                type="number"
+                name="tenantPhone"
+                id="tenantPhone"
+              />
               <br />
 
               <label htmlFor="">Property Leased</label>
@@ -197,7 +233,7 @@ export default function Main() {
 
               <label htmlFor="">Utilities Included</label>
               <input
-                 onChange={(event) =>
+                onChange={(event) =>
                   setTenantPrefill({
                     id: tenantPrefill.id,
                     name: tenantPrefill.name,
@@ -212,7 +248,7 @@ export default function Main() {
               />
               <br />
 
-              <button type="submit">Add Tenant</button>
+              <button type="submit">Update Tenant</button>
             </form>
           </Box>
         </Modal>
