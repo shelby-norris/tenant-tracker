@@ -9,9 +9,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 // Main component exported to App.jsx for more organized code
 
@@ -39,6 +39,7 @@ export default function Main() {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
+    color: "#03045eff",
   };
 
   useEffect(() => {
@@ -109,34 +110,61 @@ export default function Main() {
         return tenantObject.id !== id;
       });
     });
-  }
+  };
 
   return (
     <main>
-      <h2>New Tenant Intake Form</h2>
-      <form onSubmit={(event) => handleAddTenant(event)}>
-        <TextField id="tenantName" label="Name" name="tenantName" variant="outlined" margin="normal" />
-        <TextField id="tenantPhone" label="Phone Number" name="tenantPhone" variant="outlined" margin="normal" />
-        <TextField id="propertyLeased" label="Property Leased" name="Property Leased" variant="outlined" margin="normal" />
+      <div className="intake-form">
+        <h2>New Tenant Intake Form</h2>
+        <form onSubmit={(event) => handleAddTenant(event)}>
+          <TextField
+            id="tenantName"
+            label="Name"
+            name="tenantName"
+            variant="outlined"
+            margin="normal"
+          />
+          <TextField
+            id="tenantPhone"
+            label="Phone Number"
+            name="tenantPhone"
+            variant="outlined"
+            margin="normal"
+          />
+          <TextField
+            id="propertyLeased"
+            label="Property Leased"
+            name="Property Leased"
+            variant="outlined"
+            margin="normal"
+          />
 
-        <div>
-          <FormControlLabel control={<Checkbox name="utilitiesIncluded" id="utilitiesIncluded"/>} label="Utilities Included" />
-        </div>
-        <br />
-        <Button type="submit" variant="contained">Add Tenant</Button>
-      </form>
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox name="utilitiesIncluded" id="utilitiesIncluded" />
+              }
+              label="Utilities Included"
+            />
+          </div>
+          <br />
+          <Button type="submit" variant="contained">
+            Add Tenant
+          </Button>
+        </form>
+      </div>
 
       <section>
         <h2>All Tenants</h2>
         {tenants.length == 0 ? (
           <p>No Current Tenants</p> // If no tenants in database, p will display
         ) : (
-          <div>
+          <div className="tenant-list">
             {tenants &&
               tenants.map((tenantObject, index) => {
                 return (
-                  <div key={index}>
-                    <p>{tenantObject.name}</p>
+                  <div className="tenant-card" key={index}>
+                    <p className="tenant-card-name">{tenantObject.name}</p>
                     <p>{tenantObject.phone}</p>
                     <p>{tenantObject.property}</p>
                     <p>
@@ -144,13 +172,17 @@ export default function Main() {
                         ? "Utilities Included"
                         : "Utilities Not Included"}
                     </p>
-                    <Button onClick={() => handleOpen(tenantObject)}>
-                      Edit
-                    </Button>
+                    <div className="tenant-card-btn">
+                      <Button onClick={() => handleOpen(tenantObject)}>
+                        Edit
+                      </Button>
 
-                    <Button onClick={() => handleDeleteTenant(tenantObject.id)}>
-                      Delete
-                    </Button>
+                      <Button
+                        onClick={() => handleDeleteTenant(tenantObject.id)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   </div>
                 );
               })}
@@ -164,7 +196,12 @@ export default function Main() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{ mb: 2 }}
+            >
               Update Tenant Info
             </Typography>
             <form onSubmit={(event) => handleUpdateTenant(event)}>
@@ -222,24 +259,28 @@ export default function Main() {
               />
               <br />
 
-              <label htmlFor="">Utilities Included</label>
-              <input
-                onChange={(event) =>
-                  setTenantPrefill({
-                    id: tenantPrefill.id,
-                    name: tenantPrefill.name,
-                    phone: tenantPrefill.phone,
-                    property: tenantPrefill.property,
-                    utilitiesIncluded: event.target.checked,
-                  })
-                }
-                type="checkbox"
-                name="utilitiesIncluded"
-                id="utilitiesIncluded"
-              />
+              <div>
+                <label htmlFor="">Utilities Included</label>
+                <input
+                  onChange={(event) =>
+                    setTenantPrefill({
+                      id: tenantPrefill.id,
+                      name: tenantPrefill.name,
+                      phone: tenantPrefill.phone,
+                      property: tenantPrefill.property,
+                      utilitiesIncluded: event.target.checked,
+                    })
+                  }
+                  type="checkbox"
+                  name="utilitiesIncluded"
+                  id="utilitiesIncluded"
+                />
+              </div>
               <br />
 
-              <Button type="submit" variant="contained">Update Tenant</Button>
+              <Button type="submit" variant="contained">
+                Update Tenant
+              </Button>
             </form>
           </Box>
         </Modal>

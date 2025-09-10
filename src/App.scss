@@ -1,48 +1,131 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Racing+Sans+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Racing+Sans+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 $federal-blue: #03045eff;
 $honolulu-blue: #0077b6ff;
 $pacific-cyan: #00b4d8ff;
-$non-photo-blue: #90e0efff;
+$non-photo-blue: rgb(68, 70, 70);
 $light-cyan: #caf0f8ff;
 
 header {
   height: 20vh;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Racing Sans One";
-  font-size: x-large;
+  font-size: 2.5rem;
   color: $federal-blue;
+
+  @media (max-width: 768px) {
+    font-size: x-large;
+  }
 }
 
 main {
   min-height: 100vh;
   width: 60vw;
   margin: 0 auto;
+  box-sizing: border-box;
 
-  h1,
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
   h2 {
     text-align: center;
     font-family: "Roboto";
     color: $honolulu-blue;
   }
-}
 
-form {
-  display: flex;
-  flex-direction: column;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-
-  button {
+  .intake-form {
     background-color: $light-cyan;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    margin: 2rem auto;
+    box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      margin: 0 auto;
+    }
+  }
+
+  section {
+    max-width: 400px;
+    margin: 2rem auto;
+
+    h2 {
+      margin-top: 6rem;
+      margin-bottom: 4rem;
+      font-size: 2rem;
+      color: $federal-blue;
+
+      @media (max-width: 768px) {
+        margin-top: 5rem;
+        margin-bottom: 3rem;
+        font-size: x-large;
+      }
+    }
+
+    p {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: $non-photo-blue;
+    }
+
+    .tenant-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+
+      .tenant-card {
+        background-color: $light-cyan;
+        border-radius: 12px;
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+        .tenant-card-name {
+          font-weight: bold;
+          color: $federal-blue;
+        }
+
+        .tenant-card-btn {
+          display: flex;
+          gap: 1rem;
+          margin-top: 0.5rem;
+        }
+      }
+    }
   }
 }
 
-p {
+// modal form & p text elements
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: $federal-blue;
+  }
 }
 
 footer {
-  text-align: center;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: $honolulu-blue;
+  margin-top: 70px;
 }
