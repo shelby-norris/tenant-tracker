@@ -34,12 +34,16 @@ export default function Main() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
     bgcolor: "background.paper",
-    border: "2px solid #000",
+    border: "2px solid #03045eff",
     boxShadow: 24,
     p: 4,
     color: "#03045eff",
+    width: {
+      xs: "80%",
+      sm: "70%",
+      md: "400px",
+    },
   };
 
   useEffect(() => {

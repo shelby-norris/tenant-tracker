@@ -74,6 +74,12 @@ main {
     p {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       color: $non-photo-blue;
+
+       @media (max-width: 768px) {
+        margin-top: 6px;
+        margin-bottom: 6px;
+      }  
+
     }
 
     .tenant-list {
@@ -95,6 +101,10 @@ main {
           font-weight: bold;
           color: $federal-blue;
         }
+
+        // @media (max-width: 768px) {
+          
+        // }
 
         .tenant-card-btn {
           display: flex;
