@@ -7,7 +7,6 @@ import {
   GetCommand,
   UpdateCommand,
   DeleteCommand,
-  // listAllItems
 } from "@aws-sdk/lib-dynamodb";
 
 // All of the following code was copied from previous assignment
@@ -81,7 +80,7 @@ export const updateItem = async (tableName, key, changes) => {
       ExpressionAttributeNames: names,
 
       ExpressionAttributeValues: values,
-
+      ConditionExpression: "attribute_exists(id)",
       ReturnValues: "ALL_NEW",
     })
   );

@@ -76,15 +76,15 @@ export default function Main() {
 
   const handleUpdateTenant = async (event) => {
     event.preventDefault();
-
-    const { phone, property, utilitiesIncluded } = tenantPrefill;
+    console.log(tenantPrefill)
+    const { name, phone, property, utilitiesIncluded } = tenantPrefill;
 
     console.log(tenantPrefill.id);
 
     await updateItem(
       "Tenants",
-      { id: tenantPrefill.id, name: tenantPrefill.name },
-      { phone, property, utilitiesIncluded }
+      { id: tenantPrefill.id },
+      { name, phone, property, utilitiesIncluded }
     );
 
     setTenants((oldTenants) => {
@@ -98,8 +98,8 @@ export default function Main() {
     setOpen(false);
   };
 
-  const handleDeleteTenant = async (id, name) => {
-    await deleteItem("Tenants", { id: id, name: name });
+  const handleDeleteTenant = async (id) => {
+    await deleteItem("Tenants", { id: id });
     console.log(id);
     setTenants((oldTenants) => {
       return oldTenants.filter((tenantObject) => {
@@ -157,7 +157,7 @@ export default function Main() {
                       Edit
                     </Button>
 
-                    <Button onClick={() => handleDeleteTenant(tenantObject.id, tenantObject.name)}>
+                    <Button onClick={() => handleDeleteTenant(tenantObject.id)}>
                       Delete
                     </Button>
                   </div>
