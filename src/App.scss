@@ -1,7 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Racing+Sans+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+$federal-blue: #03045eff;
+$honolulu-blue: #0077b6ff;
+$pacific-cyan: #00b4d8ff;
+$non-photo-blue: #90e0efff;
+$light-cyan: #caf0f8ff;
+
+header {
+  height: 20vh;
+  text-align: center;
+  font-family: "Racing Sans One";
+  font-size: x-large;
+  color: $federal-blue;
+}
+
 main {
-    min-height: 100vh;
+  min-height: 100vh;
+  width: 60vw;
+  margin: 0 auto;
+
+  h1,
+  h2 {
+    text-align: center;
+    font-family: "Roboto";
+    color: $honolulu-blue;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+  button {
+    background-color: $light-cyan;
+  }
+}
+
+p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 footer {
-    text-align: center;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: $honolulu-blue;
 }
