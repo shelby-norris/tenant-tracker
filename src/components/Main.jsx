@@ -5,6 +5,7 @@ import {
   deleteItem,
   listAllItems,
 } from "../utils/dynamo";
+import TenantForm from "./TenantForm";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -120,7 +121,7 @@ export default function Main() {
     <main>
       <div className="intake-form">
         <h2>New Tenant Intake Form</h2>
-        <form onSubmit={(event) => handleAddTenant(event)}>
+        {/* <form onSubmit={(event) => handleAddTenant(event)}>
           <TextField
             id="tenantName"
             label="Name"
@@ -155,7 +156,10 @@ export default function Main() {
           <Button type="submit" variant="contained">
             Add Tenant
           </Button>
-        </form>
+        </form> */}
+        <TenantForm
+          handleAddTenant={handleAddTenant}
+        />
       </div>
 
       <section>
@@ -289,6 +293,11 @@ export default function Main() {
                 Update Tenant
               </Button>
             </form>
+
+            {/* <TenantForm
+
+            /> */}
+            
           </Box>
         </Modal>
       </section>
