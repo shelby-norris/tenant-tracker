@@ -209,7 +209,7 @@ export default function Main() {
               Update Tenant Info
             </Typography>
             <form onSubmit={(event) => handleUpdateTenant(event)}>
-              <label htmlFor="">Name</label>
+              <label htmlFor="tenantName">Name</label>
               <input
                 onChange={(event) =>
                   setTenantPrefill({
@@ -227,7 +227,7 @@ export default function Main() {
               />
               <br />
 
-              <label htmlFor="">Phone Number</label>
+              <label htmlFor="tenantPhone">Phone Number</label>
               <input
                 onChange={(event) =>
                   setTenantPrefill({
@@ -245,7 +245,7 @@ export default function Main() {
               />
               <br />
 
-              <label htmlFor="">Property Leased</label>
+              <label htmlFor="propertyLeased">Property Leased</label>
               <input
                 onChange={(event) =>
                   setTenantPrefill({
@@ -264,7 +264,7 @@ export default function Main() {
               <br />
 
               <div>
-                <label htmlFor="">Utilities Included</label>
+                <label htmlFor="utilitiesIncluded">Utilities Included</label>
                 <input
                   onChange={(event) =>
                     setTenantPrefill({
