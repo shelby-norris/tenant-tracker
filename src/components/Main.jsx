@@ -5,7 +5,6 @@ import {
   deleteItem,
   listAllItems,
 } from "../utils/dynamo";
-import TenantForm from "./TenantForm";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -13,6 +12,8 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import TenantForm from "./TenantForm";
+import ModalForm from "./ModalForm";
 
 // Main component exported to App.jsx for more organized code
 
@@ -157,9 +158,7 @@ export default function Main() {
             Add Tenant
           </Button>
         </form> */}
-        <TenantForm
-          handleAddTenant={handleAddTenant}
-        />
+        <TenantForm handleAddTenant={handleAddTenant} />
       </div>
 
       <section>
@@ -199,7 +198,7 @@ export default function Main() {
                   </div>
                 );
               })}
-          </div> // If tenants are greater than 0, div will display them all
+          </div>// If tenants are greater than 0, div will display them all
         )}
 
         <Modal
@@ -218,7 +217,7 @@ export default function Main() {
               Update Tenant Info
             </Typography>
 
-            <form onSubmit={(event) => handleUpdateTenant(event)}>
+            {/* <form onSubmit={(event) => handleUpdateTenant(event)}>
               <TextField
                 id="tenantName"
                 label="Name"
@@ -292,12 +291,11 @@ export default function Main() {
               <Button type="submit" variant="contained">
                 Update Tenant
               </Button>
-            </form>
-
-            {/* <TenantForm
-
-            /> */}
-            
+            </form> */}
+            <ModalForm 
+              setTenantPrefill={setTenantPrefill}
+              handleUpdateTenant={handleUpdateTenant}
+            />
           </Box>
         </Modal>
       </section>
