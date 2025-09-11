@@ -9,9 +9,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import TenantForm from "./TenantForm";
 
 // Main component exported to App.jsx for more organized code
 
@@ -34,11 +35,16 @@ export default function Main() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
     bgcolor: "background.paper",
-    border: "2px solid #000",
+    border: "2px solid #03045eff",
     boxShadow: 24,
     p: 4,
+    color: "#03045eff",
+    width: {
+      xs: "80%",
+      sm: "70%",
+      md: "400px",
+    },
   };
 
   useEffect(() => {
@@ -109,34 +115,62 @@ export default function Main() {
         return tenantObject.id !== id;
       });
     });
-  }
+  };
 
   return (
     <main>
-      <h2>New Tenant Intake Form</h2>
-      <form onSubmit={(event) => handleAddTenant(event)}>
-        <TextField id="tenantName" label="Name" name="tenantName" variant="outlined" margin="normal" />
-        <TextField id="tenantPhone" label="Phone Number" name="tenantPhone" variant="outlined" margin="normal" />
-        <TextField id="propertyLeased" label="Property Leased" name="Property Leased" variant="outlined" margin="normal" />
+      <div className="intake-form">
+        <h2>New Tenant Intake Form</h2>
+        {/* <form onSubmit={(event) => handleAddTenant(event)}>
+          <TextField
+            id="tenantName"
+            label="Name"
+            name="tenantName"
+            variant="outlined"
+            margin="normal"
+          />
+          <TextField
+            id="tenantPhone"
+            label="Phone Number"
+            name="tenantPhone"
+            variant="outlined"
+            margin="normal"
+          />
+          <TextField
+            id="propertyLeased"
+            label="Property Leased"
+            name="Property Leased"
+            variant="outlined"
+            margin="normal"
+          />
 
-        <div>
-          <FormControlLabel control={<Checkbox name="utilitiesIncluded" id="utilitiesIncluded"/>} label="Utilities Included" />
-        </div>
-        <br />
-        <Button type="submit" variant="contained">Add Tenant</Button>
-      </form>
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox name="utilitiesIncluded" id="utilitiesIncluded" />
+              }
+              label="Utilities Included"
+            />
+          </div>
+          <br />
+          <Button type="submit" variant="contained">
+            Add Tenant
+          </Button>
+        </form> */}
+        <TenantForm handleAddTenant={handleAddTenant} />
+      </div>
 
       <section>
         <h2>All Tenants</h2>
         {tenants.length == 0 ? (
-          <p>No Current Tenants</p> // If no tenants in database, p will display
+          <p className="no-tenants">No Current Tenants</p> // If no tenants in database, p will display
         ) : (
-          <div>
+          <div className="tenant-list">
             {tenants &&
               tenants.map((tenantObject, index) => {
                 return (
-                  <div key={index}>
-                    <p>{tenantObject.name}</p>
+                  <div className="tenant-card" key={index}>
+                    <p className="tenant-card-name">{tenantObject.name}</p>
                     <p>{tenantObject.phone}</p>
                     <p>{tenantObject.property}</p>
                     <p>
@@ -144,13 +178,22 @@ export default function Main() {
                         ? "Utilities Included"
                         : "Utilities Not Included"}
                     </p>
-                    <Button onClick={() => handleOpen(tenantObject)}>
-                      Edit
-                    </Button>
+                    <div className="tenant-card-btn">
+                      <Button
+                        variant="contained"
+                        onClick={() => handleOpen(tenantObject)}
+                      >
+                        Edit
+                      </Button>
 
-                    <Button onClick={() => handleDeleteTenant(tenantObject.id)}>
-                      Delete
-                    </Button>
+                      <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => handleDeleteTenant(tenantObject.id)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   </div>
                 );
               })}
@@ -164,12 +207,23 @@ export default function Main() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{ mb: 2 }}
+            >
               Update Tenant Info
             </Typography>
+
             <form onSubmit={(event) => handleUpdateTenant(event)}>
-              <label htmlFor="">Name</label>
-              <input
+              <TextField
+                id="tenantName"
+                label="Name"
+                name="tenantName"
+                variant="outlined"
+                margin="normal"
+                value={tenantPrefill.name}
                 onChange={(event) =>
                   setTenantPrefill({
                     id: tenantPrefill.id,
@@ -179,15 +233,14 @@ export default function Main() {
                     utilitiesIncluded: tenantPrefill.utilitiesIncluded,
                   })
                 }
-                value={tenantPrefill.name}
-                type="text"
-                name="tenantName"
-                id="tenantName"
               />
-              <br />
-
-              <label htmlFor="">Phone Number</label>
-              <input
+              <TextField
+                id="tenantPhone"
+                label="Phone Number"
+                name="tenantPhone"
+                variant="outlined"
+                margin="normal"
+                value={tenantPrefill.phone}
                 onChange={(event) =>
                   setTenantPrefill({
                     id: tenantPrefill.id,
@@ -197,15 +250,14 @@ export default function Main() {
                     utilitiesIncluded: tenantPrefill.utilitiesIncluded,
                   })
                 }
-                value={tenantPrefill.phone}
-                type="number"
-                name="tenantPhone"
-                id="tenantPhone"
               />
-              <br />
-
-              <label htmlFor="">Property Leased</label>
-              <input
+              <TextField
+                id="propertyLeased"
+                label="Property Leased"
+                name="Property Leased"
+                variant="outlined"
+                margin="normal"
+                value={tenantPrefill.property}
                 onChange={(event) =>
                   setTenantPrefill({
                     id: tenantPrefill.id,
@@ -215,31 +267,29 @@ export default function Main() {
                     utilitiesIncluded: tenantPrefill.utilitiesIncluded,
                   })
                 }
-                value={tenantPrefill.property}
-                type="text"
-                name="propertyLeased"
-                id="propertyLeased"
               />
+              <div>
+                <FormControlLabel
+                  control={
+                    <Checkbox name="utilitiesIncluded" id="utilitiesIncluded" />
+                  }
+                  label="Utilities Included"
+                  onChange={(event) =>
+                    setTenantPrefill({
+                      id: tenantPrefill.id,
+                      name: tenantPrefill.name,
+                      phone: tenantPrefill.phone,
+                      property: tenantPrefill.property,
+                      utilitiesIncluded: event.target.checked,
+                    })
+                  }
+                />
+              </div>
               <br />
 
-              <label htmlFor="">Utilities Included</label>
-              <input
-                onChange={(event) =>
-                  setTenantPrefill({
-                    id: tenantPrefill.id,
-                    name: tenantPrefill.name,
-                    phone: tenantPrefill.phone,
-                    property: tenantPrefill.property,
-                    utilitiesIncluded: event.target.checked,
-                  })
-                }
-                type="checkbox"
-                name="utilitiesIncluded"
-                id="utilitiesIncluded"
-              />
-              <br />
-
-              <Button type="submit" variant="contained">Update Tenant</Button>
+              <Button type="submit" variant="contained">
+                Update Tenant
+              </Button>
             </form>
           </Box>
         </Modal>
