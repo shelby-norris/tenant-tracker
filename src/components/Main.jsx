@@ -13,7 +13,6 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TenantForm from "./TenantForm";
-import ModalForm from "./ModalForm";
 
 // Main component exported to App.jsx for more organized code
 
@@ -217,7 +216,7 @@ export default function Main() {
               Update Tenant Info
             </Typography>
 
-            {/* <form onSubmit={(event) => handleUpdateTenant(event)}>
+            <form onSubmit={(event) => handleUpdateTenant(event)}>
               <TextField
                 id="tenantName"
                 label="Name"
@@ -291,11 +290,8 @@ export default function Main() {
               <Button type="submit" variant="contained">
                 Update Tenant
               </Button>
-            </form> */}
-            <ModalForm 
-              setTenantPrefill={setTenantPrefill}
-              handleUpdateTenant={handleUpdateTenant}
-            />
+            </form>
+            
           </Box>
         </Modal>
       </section>
