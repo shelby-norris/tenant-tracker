@@ -6,9 +6,16 @@ import {
   ScanCommand,
   GetCommand,
   DeleteCommand,
+  UpdateCommand,
 } from "@aws-sdk/lib-dynamodb";
 
-import { createItem, listAllItems, getItem, deleteItem } from "./dynamo";
+import {
+  createItem,
+  listAllItems,
+  getItem,
+  deleteItem,
+  updateItem,
+} from "./dynamo";
 
 // All of the following code was copied from previous assignment
 
@@ -23,9 +30,9 @@ describe("CRUD (unit, mocked) with Vitest", () => {
     ddbMock.on(PutCommand).resolves({});
     const item = { id: "1", text: "hi" };
 
-    const out = await createItem("Testing", item);
+    const output = await createItem("Testing", item);
 
-    expect(out).toEqual(item);
+    expect(output).toEqual(item);
   });
 
   it("ListAllItems returns an array", async () => {
@@ -61,5 +68,14 @@ describe("CRUD (unit, mocked) with Vitest", () => {
     const output = await deleteItem("Table", { id: "1" });
 
     expect(output).toEqual(mockItem);
+  });
+
+  it("updateItem changes tenant name", async () => {
+    const mockUpdate = { id: "1", name: "Updated" };
+    ddbMock.on(UpdateCommand).resolves({ Attributes: mockUpdate });
+
+    const output = await updateItem("FakeTable", { id: "1" }, "Updated");
+
+    expect(output).toEqual(mockUpdate);
   });
 });

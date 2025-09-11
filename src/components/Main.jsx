@@ -163,7 +163,7 @@ export default function Main() {
       <section>
         <h2>All Tenants</h2>
         {tenants.length == 0 ? (
-          <p>No Current Tenants</p> // If no tenants in database, p will display
+          <p className="no-tenants">No Current Tenants</p> // If no tenants in database, p will display
         ) : (
           <div className="tenant-list">
             {tenants &&
@@ -197,7 +197,7 @@ export default function Main() {
                   </div>
                 );
               })}
-          </div>// If tenants are greater than 0, div will display them all
+          </div> // If tenants are greater than 0, div will display them all
         )}
 
         <Modal
@@ -291,7 +291,6 @@ export default function Main() {
                 Update Tenant
               </Button>
             </form>
-            
           </Box>
         </Modal>
       </section>
