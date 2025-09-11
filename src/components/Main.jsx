@@ -177,11 +177,16 @@ export default function Main() {
                         : "Utilities Not Included"}
                     </p>
                     <div className="tenant-card-btn">
-                      <Button onClick={() => handleOpen(tenantObject)}>
+                      <Button
+                        variant="contained"
+                        onClick={() => handleOpen(tenantObject)}
+                      >
                         Edit
                       </Button>
 
                       <Button
+                        variant="contained"
+                        color="error"
                         onClick={() => handleDeleteTenant(tenantObject.id)}
                       >
                         Delete
@@ -208,7 +213,7 @@ export default function Main() {
             >
               Update Tenant Info
             </Typography>
-            
+
             <form onSubmit={(event) => handleUpdateTenant(event)}>
               <TextField
                 id="tenantName"
