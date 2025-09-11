@@ -208,9 +208,15 @@ export default function Main() {
             >
               Update Tenant Info
             </Typography>
+            
             <form onSubmit={(event) => handleUpdateTenant(event)}>
-              <label htmlFor="tenantName">Name</label>
-              <input
+              <TextField
+                id="tenantName"
+                label="Name"
+                name="tenantName"
+                variant="outlined"
+                margin="normal"
+                value={tenantPrefill.name}
                 onChange={(event) =>
                   setTenantPrefill({
                     id: tenantPrefill.id,
@@ -220,15 +226,14 @@ export default function Main() {
                     utilitiesIncluded: tenantPrefill.utilitiesIncluded,
                   })
                 }
-                value={tenantPrefill.name}
-                type="text"
-                name="tenantName"
-                id="tenantName"
               />
-              <br />
-
-              <label htmlFor="tenantPhone">Phone Number</label>
-              <input
+              <TextField
+                id="tenantPhone"
+                label="Phone Number"
+                name="tenantPhone"
+                variant="outlined"
+                margin="normal"
+                value={tenantPrefill.phone}
                 onChange={(event) =>
                   setTenantPrefill({
                     id: tenantPrefill.id,
@@ -238,15 +243,14 @@ export default function Main() {
                     utilitiesIncluded: tenantPrefill.utilitiesIncluded,
                   })
                 }
-                value={tenantPrefill.phone}
-                type="number"
-                name="tenantPhone"
-                id="tenantPhone"
               />
-              <br />
-
-              <label htmlFor="propertyLeased">Property Leased</label>
-              <input
+              <TextField
+                id="propertyLeased"
+                label="Property Leased"
+                name="Property Leased"
+                variant="outlined"
+                margin="normal"
+                value={tenantPrefill.property}
                 onChange={(event) =>
                   setTenantPrefill({
                     id: tenantPrefill.id,
@@ -256,16 +260,13 @@ export default function Main() {
                     utilitiesIncluded: tenantPrefill.utilitiesIncluded,
                   })
                 }
-                value={tenantPrefill.property}
-                type="text"
-                name="propertyLeased"
-                id="propertyLeased"
               />
-              <br />
-
               <div>
-                <label htmlFor="utilitiesIncluded">Utilities Included</label>
-                <input
+                <FormControlLabel
+                  control={
+                    <Checkbox name="utilitiesIncluded" id="utilitiesIncluded" />
+                  }
+                  label="Utilities Included"
                   onChange={(event) =>
                     setTenantPrefill({
                       id: tenantPrefill.id,
@@ -275,9 +276,6 @@ export default function Main() {
                       utilitiesIncluded: event.target.checked,
                     })
                   }
-                  type="checkbox"
-                  name="utilitiesIncluded"
-                  id="utilitiesIncluded"
                 />
               </div>
               <br />
