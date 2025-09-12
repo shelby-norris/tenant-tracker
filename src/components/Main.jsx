@@ -25,7 +25,7 @@ import TenantForm from "./TenantForm";
 
 // state
 export default function Main() {
-  const [tenants, setTenants] = useState([]);
+  const [tenants, setTenants] = useState([]); // current tenants on page
   const [open, setOpen] = useState(false); // modal open state
   const [tenantPrefill, setTenantPrefill] = useState({}); // fills text fields in update modal form
 
